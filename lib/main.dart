@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 void main() => runApp(StudyJam());
 
@@ -24,15 +25,51 @@ class StudyJam extends StatelessWidget {
   }
 }
 
-class Screen extends StatelessWidget {
+// class Screen extends StatelessWidget {
+  // Widget build(BuildContext context) {
+    // return Scaffold(
+      // appBar: AppBar(
+        // title: Text("Study Jam"),
+        // centerTitle: true,
+      // ),
+      // body: Center(child: Text("Hello world"),
+      // )
+    // );
+  // }
+// }
+
+class Screen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _Screen();
+  }
+}
+
+class _Screen extends State<Screen>{
+  String _string = "flutter";
+
+  void getNewWord() {
+    var _word = WordPair.random();
+    setState(() {
+      _string = _word.asPascalCase;
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Study Jam"),
+        title: Text("Study Jam : NewWord"),
         centerTitle: true,
       ),
-      body: Center(child: Text("Hello world"),
-      )
+      body: Center(
+        child: Text(_string),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.refresh),
+        onPressed: (){
+          getNewWord();
+        },
+      ),
     );
   }
 }
